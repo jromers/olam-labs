@@ -47,9 +47,7 @@ The variables for the OCNE cluster are defined in the `<playbookdir>/group_vars/
 | my_https_proxy | | Proxy details, leave empty if not using proxy
 | my_http_proxy | | Proxy details, leave empty if not using proxy
 | my_no_proxy | | Proxy details, leave empty if not using proxy
-| do_preparation | Yes | Set do_preparation to _true_ for the first deployment, it configures SSH keys, certificates and repositories. After a reset_ocne playbook run it should be set to _false_ to skip the basic plumbing
 | container_registry | Yes | Container registry path to get the OCNE component container images
-| virtual_ip | | The virtual IP address for an olcne-nginx with internal load balancer
 | ocne_environment | Yes | Set name for the OCNE environment
 | ocne_k8s | Yes | Set name of the OCNE Kubernetes module
 | ocne_helm | Yes | Set name of the OCNE Helm module, installed by default but only used when other modules are configured 
@@ -104,6 +102,7 @@ For the OCI-CCM module you need to store the API key file in the playbooks files
 
 The playbooks are tested with kubernetes nodes for on-premise infrastructure as well as OCI instances in Oracle cloud. They both work from the command line by running the `ansible-playbook` command or when they are imported in Oracle Linux Automation Manager (OLAM). Example command line:
 
+    $ ansible-playbook -i inventories/hosts.ini ./prepare-ocne-deployment.yml
     $ ansible-playbook -i inventories/hosts.ini ./deploy-ocne.yml
     $ ansible-playbook -i inventories/hosts.ini ./deploy-mod-ociccm.yml
 
