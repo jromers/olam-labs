@@ -48,6 +48,7 @@ The variables for the OCNE cluster are defined in the `<playbookdir>/group_vars/
 | my_http_proxy | | Proxy details, leave empty if not using proxy
 | my_no_proxy | | Proxy details, leave empty if not using proxy
 | container_registry | Yes | Container registry path to get the OCNE component container images
+| env_file | Yes | Name of OCNE configuration file
 | ocne_environment | Yes | Set name for the OCNE environment
 | ocne_k8s | Yes | Set name of the OCNE Kubernetes module
 | ocne_helm | Yes | Set name of the OCNE Helm module, installed by default but only used when other modules are configured 
