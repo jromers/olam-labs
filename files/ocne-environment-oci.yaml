@@ -1,7 +1,7 @@
 environments:
     - environment-name: ocne_env
       globals:
-        api-server: ocne-control01.example.com:8091
+        api-server: ocne-control01:8091
       modules:
         - module: kubernetes
           name: ocne_cluster
@@ -9,9 +9,9 @@ environments:
           args:
             container-registry: container-registry-lhr.oracle.com/olcne
             master-nodes: 
-                - ocne-control01.example.com:8090
+                - ocne-control01:8090
             worker-nodes:
-                - ocne-worker01.example.com:8090
+                - ocne-worker01:8090
             selinux: enforcing
             restrict-service-externalip: false
         - module: helm 
