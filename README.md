@@ -4,7 +4,8 @@ The Oracle Cloud Native Environment playbooks support servers on Oracle Linux 8 
 
 These are the playbooks to run in Ansible:
 
-* deploy-ocne.yml - deploys initial OCNE environment including the Kubernetes and Helm modules
+* prepare-ocne-deployment.yml - prepares the operator node to fulfill prequisites before running the quick install using configuration file
+* provision-ocne.yml - provision/deploys initial OCNE environment with quick install using configuration file, run this playbook after prepare-ocne-deployment.yml or reset-ocne.yml
 * deploy-mod-metallb.yml - Deploys MetalLB loadbalancer
 * deploy-mod-ociccm.yml - Deploys the OCI-CCM module when running in Oracle OCI used for OCI loadbalancer and storage
 * deploy-mod-istio.yml - deploys Istio service mesh
@@ -19,11 +20,11 @@ Make sure the following configuration steps are done before running the playbook
 ## OCNE Configuration file
 
 The playbooks use the [Quick Install using Configuration File](https://docs.oracle.com/en/operating-systems/olcne/1.5/quickinstall/task-provision-config.html) installation scenario.
-The configuration file includes all information about the environments and modules you want to create. 
+An OCNE configuration file includes all information about the environments and modules you want to create. 
 This file in combination with the quick install procedure of OCNE saves repeated steps in the 
 installation process. 
 
-The OCNE playbooks expect to have a configuration file in the `<playbookdir>/files` directory with file extension `.yaml`. You can name the file whatever you want as long as the file-name is added to the playbook variables (eg: `env_file: ocne-environment.yaml`) for you intended OCNE cluster.
+The OCNE playbooks requires to have the OCNE configuration file downloaded from a specified download url (`env_file_url` variable) and the configuration file will be stored on the OCNE operator node in a specified file (`env_file` variable).
 
 Information on how to create a configuration file is explained in the [OCNE Platform CLI documentation](https://docs.oracle.com/en/operating-systems/olcne/1.5/olcnectl/config.html#write).
 
@@ -48,6 +49,7 @@ The variables for the OCNE cluster are defined in the `<playbookdir>/group_vars/
 | my_http_proxy | | Proxy details, leave empty if not using proxy
 | my_no_proxy | | Proxy details, leave empty if not using proxy
 | container_registry | Yes | Container registry path to get the OCNE component container images
+| env_file_url | Yes | URL for the OCNE configuration file
 | env_file | Yes | Name of OCNE configuration file
 | ocne_environment | Yes | Set name for the OCNE environment
 | ocne_k8s | Yes | Set name of the OCNE Kubernetes module
